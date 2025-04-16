@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { fetchTrendingMovies } from "../../api/tmdb-api.js";
 import MovieList from "../../components/MovieList/MovieList";
 import { useLocation } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import s from "./HomePage.module.css";
 
 function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -28,9 +30,11 @@ function HomePage() {
   return (
     <section>
       <div className="container">
+        {isLoading && <Loader />}
         {!isLoading && !error && movies.length === 0 && (
           <p>No trending movies</p>
         )}
+        <h2 className={s.title}>Trending today</h2>
         <MovieList movies={movies} location={location} />
       </div>
     </section>

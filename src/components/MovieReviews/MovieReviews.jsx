@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieReviews } from "../../api/tmdb-api";
+import s from "./MovieReviews.module.css";
 
 function MovieReviews() {
   const { movieId } = useParams();
@@ -14,8 +15,8 @@ function MovieReviews() {
         setIsLoading(true);
         const data = await fetchMovieReviews(movieId);
         setReviews(data);
-      } catch (error) {
-        setError(error.message || "Failed to load reviews.");
+      } catch (err) {
+        setError(err.message || "Failed to load reviews.");
       } finally {
         setIsLoading(false);
       }
@@ -25,22 +26,20 @@ function MovieReviews() {
   }, [movieId]);
 
   return (
-    <div>
+    <div className={s.container}>
       {isLoading && <p>Loading reviews...</p>}
       {error && <p>{error}</p>}
       {reviews.length > 0 ? (
-        <ul>
+        <ul className={s.list}>
           {reviews.map(({ id, author, content }) => (
-            <li key={id}>
-              <p>
-                <strong>{author}</strong>
-              </p>
-              <p>{content}</p>
+            <li key={id} className={s.review}>
+              <h4 className={s.author}>{author}</h4>
+              <p className={s.text}>{content}</p>
             </li>
           ))}
         </ul>
       ) : (
-        !isLoading && <p>No reviews found.</p>
+        !isLoading && <p>No reviews available.</p>
       )}
     </div>
   );

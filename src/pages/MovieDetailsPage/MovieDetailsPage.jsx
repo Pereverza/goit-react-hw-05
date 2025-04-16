@@ -1,6 +1,8 @@
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { fetchMovieDetails } from "../../api/tmdb-api.js";
+import Loader from "../../components/Loader/Loader";
+import s from "./MovieDetailsPage.module.css";
 
 function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -9,9 +11,7 @@ function MovieDetailsPage() {
   const [error, setError] = useState(null);
 
   const location = useLocation();
-
-  // Зберігаємо "звідки прийшли"
-  const goBackRef = useRef(location.state?.from || "/movies");
+  const goBackLink = location?.state?.from || location?.state || "/movies";
 
   useEffect(() => {
     const getDetails = async () => {
@@ -30,35 +30,45 @@ function MovieDetailsPage() {
   }, [movieId]);
 
   return (
-    <section>
-      <Link to={goBackRef.current}>Go Back</Link>
-
-      {isLoading && <p>Loading...</p>}
+    <section className={s.container}>
+      <Link to={goBackLink} className={s.goBack}>
+        Go Back
+      </Link>
+      {isLoading && <Loader />}
       {error && <p>{error}</p>}
-
       {movie && (
-        <div>
-          <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
-          <p>Rating: {movie.vote_average}</p>
+        <div className={s.details}>
           <img
+            className={s.poster}
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
             width={250}
           />
+          <div>
+            <h1 className={s.title}>{movie.title}</h1>
+            <p className={s.overview}>{movie.overview}</p>
+            <p className={s.rating}>Rating: {movie.vote_average}</p>
+          </div>
         </div>
       )}
-
-      <div style={{ marginTop: "20px" }}>
+      <div className={s.additional}>
         <h3>Additional Information</h3>
         <ul>
           <li>
-            <Link to="cast" state={{ from: goBackRef.current }}>
+            <Link
+              to="cast"
+              state={{ from: goBackLink }}
+              className={s.goBackBtn}
+            >
               Cast
             </Link>
           </li>
           <li>
-            <Link to="reviews" state={{ from: goBackRef.current }}>
+            <Link
+              to="reviews"
+              state={{ from: goBackLink }}
+              className={s.goBackBtn}
+            >
               Reviews
             </Link>
           </li>

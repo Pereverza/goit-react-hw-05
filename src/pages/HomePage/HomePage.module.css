@@ -1,0 +1,23 @@
+.title {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 32px;
+  background: linear-gradient(to right, #020ef2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: 1.2px;
+  animation: popIn 0.8s ease-out;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.css";
+import s from "./Navigation.module.css";
 
 function Navigation() {
   return (
-    <header className={styles.header}>
-      <nav className={styles.nav}>
+    <header className={s.header}>
+      <nav className={s.nav}>
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? styles.active : styles.link)}

@@ -1,0 +1,12 @@
+.castList {
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.castItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  text-align: center;
+}

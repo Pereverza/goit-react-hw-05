@@ -1,0 +1,38 @@
+.container {
+  margin-top: 24px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.review {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s;
+  max-width: 900px;
+}
+
+.review:hover {
+  transform: scale(1.01);
+}
+
+.author {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1202f4;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #212223;
+  white-space: pre-line;
+}

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieCast } from "../../api/tmdb-api";
+import Loader from "../Loader/Loader";
+import s from "./MovieCast.module.css";
 
 function MovieCast() {
   const { movieId } = useParams();
@@ -26,17 +28,17 @@ function MovieCast() {
 
   return (
     <div>
-      {isLoading && <p>Loading cast...</p>}
+      {isLoading && <Loader />}
       {error && <p>{error}</p>}
       {cast.length > 0 ? (
-        <ul>
+        <ul className={s.castList}>
           {cast.map(({ id, name, character, profile_path }) => (
-            <li key={id}>
+            <li className={s.castItem} key={id}>
               <img
                 src={
                   profile_path
                     ? `https://image.tmdb.org/t/p/w200${profile_path}`
-                    : "https://via.placeholder.com/200x300?text=No+Image"
+                    : "https://image.tmdb.org/t/p/w200/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
                 }
                 alt={name}
                 width={100}
